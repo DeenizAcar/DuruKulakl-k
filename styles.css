@@ -88,6 +88,25 @@ button {
   align-items: stretch;
 }
 
+.hero-single {
+  grid-template-columns: 1fr;
+}
+
+.hero-copy-centered {
+  text-align: center;
+}
+
+.hero-copy-centered h1,
+.hero-copy-centered .lede,
+.hero-actions-single {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-actions-single {
+  justify-content: center;
+}
+
 .hero-copy,
 .hero-panel,
 .compare-section,
@@ -181,6 +200,20 @@ h1 {
   padding: 20px;
   display: grid;
   gap: 14px;
+}
+
+.hero-panel,
+.compare-section,
+.library-section,
+.section-heading,
+.slot-controls,
+.comparison-grid,
+.entry-grid,
+.stat-card,
+.compare-card,
+.entry-card,
+.placeholder-card {
+  display: none;
 }
 
 .stat-card {

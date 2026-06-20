@@ -21,64 +21,17 @@
     <div class="bg-orb bg-orb-1"></div>
     <div class="bg-orb bg-orb-2"></div>
     <main class="shell">
-      <section class="hero">
-        <div class="hero-copy">
+      <section class="hero hero-single">
+        <div class="hero-copy hero-copy-centered">
           <p class="eyebrow">Netlify + JSON paylaşımı</p>
-          <h1>Kulaklık alırken modeli, fiyatı, renkleri ve resim görselleri tek yerde karşılaştır.</h1>
+          <h1>Kulaklık eklemek için tek buton.</h1>
           <p class="lede">
-            Combo box’tan gömülü modeli seç, fiyatı gir, renk varyantlarını istediğin resim formatıyla yükle.
-            Eklenen kayıtlar Netlify Blobs ile ortak JSON deposunda tutulur, böylece arkadaşların da görebilir.
+            Model, fiyat, renk varyantı ve resim dosyaları ekleme akışı modal içinde kalır. Ana ekranda başka alan yok.
           </p>
-          <div class="hero-actions">
+          <div class="hero-actions hero-actions-single">
             <button class="primary-button" id="open-add-modal">Kulaklık Ekle</button>
-            <button class="secondary-button" id="focus-compare">Karşılaştırmayı Aç</button>
           </div>
         </div>
-        <aside class="hero-panel">
-          <div class="stat-card">
-            <span>Gömülü modeller</span>
-            <strong id="catalog-count">0</strong>
-          </div>
-          <div class="stat-card">
-            <span>Paylaşılan kayıtlar</span>
-            <strong id="entry-count">0</strong>
-          </div>
-          <div class="stat-card">
-            <span>Renk desteği</span>
-            <strong>Resim</strong>
-          </div>
-        </aside>
-      </section>
-
-      <section class="compare-section">
-        <div class="section-heading">
-          <div>
-            <p class="section-kicker">Karşılaştırma</p>
-            <h2>İki kulaklığı seç ve detayları yan yana gör.</h2>
-          </div>
-          <div class="slot-controls">
-            <label>
-              Sol taraf
-              <select id="left-slot"></select>
-            </label>
-            <label>
-              Sağ taraf
-              <select id="right-slot"></select>
-            </label>
-          </div>
-        </div>
-        <div class="comparison-grid" id="comparison-grid"></div>
-      </section>
-
-      <section class="library-section">
-        <div class="section-heading compact">
-          <div>
-            <p class="section-kicker">Kayıtlar</p>
-            <h2>Eklediklerin ortak JSON depoya düşer.</h2>
-          </div>
-          <button class="ghost-button" id="refresh-data">Yenile</button>
-        </div>
-        <div class="entry-grid" id="entry-grid"></div>
       </section>
     </main>
 
