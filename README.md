@@ -7,7 +7,7 @@ Netlify'a yayınlanabilen, kulaklık modellerini yan yana karşılaştıran tek 
 - Combo box ile gömülü model seçimi
 - Fiyat girişi
 - Her kulaklık için birden fazla renk varyantı
-- Her renk için PNG yükleme
+- Her renk için resim yükleme
 - Paylaşılan kayıtları Netlify Blobs üzerinde JSON olarak saklama
 - İki kulaklığı karşılaştırma panelinde yan yana görme
 

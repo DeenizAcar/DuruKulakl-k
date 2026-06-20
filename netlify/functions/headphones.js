@@ -80,6 +80,13 @@ export default async function handler(request) {
         return jsonResponse({ error: "En az bir renk varyantı ekle." }, 400);
       }
 
+      for (const color of normalized.colors) {
+        const image = String(color?.image || "");
+        if (!image.startsWith("data:image/")) {
+          return jsonResponse({ error: "Her renk için geçerli bir resim yükle." }, 400);
+        }
+      }
+
       const currentEntries = await readEntries();
       const nextEntries = [normalized, ...currentEntries].slice(0, 50);
       await writeEntries(nextEntries);

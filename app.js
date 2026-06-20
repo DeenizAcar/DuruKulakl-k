@@ -141,8 +141,8 @@ function createColorRow(name = "", image = "") {
       <input type="text" class="color-name" maxlength="32" placeholder="Siyah" value="${escapeHtml(name)}" required />
     </label>
     <label class="file-label">
-      PNG yükle
-      <input type="file" class="color-file" accept="image/png" required />
+      Resim yükle
+      <input type="file" class="color-file" accept="image/*" required />
     </label>
     <img class="color-preview" alt="Renk önizleme" ${image ? `src="${image}"` : "style=\"display:none\""} />
     <button class="remove-row" type="button" aria-label="Rengi kaldır">×</button>
@@ -165,9 +165,9 @@ function createColorRow(name = "", image = "") {
       return;
     }
 
-    if (file.type !== "image/png") {
+    if (!file.type.startsWith("image/")) {
       fileInput.value = "";
-      alert("Sadece PNG dosyası yükle.");
+      alert("Sadece resim dosyası yükle.");
       return;
     }
 
@@ -415,7 +415,7 @@ async function readFileAsDataUrl(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(String(reader.result || ""));
-    reader.onerror = () => reject(new Error("PNG okunamadı."));
+    reader.onerror = () => reject(new Error("Resim okunamadı."));
     reader.readAsDataURL(file);
   });
 }
@@ -443,7 +443,7 @@ async function submitForm(event) {
     }
 
     if (!image) {
-      alert(`${name} için bir PNG yükle.`);
+      alert(`${name} için bir resim yükle.`);
       return;
     }
 
