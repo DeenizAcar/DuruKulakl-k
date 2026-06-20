@@ -1,0 +1,14 @@
+{
+  "name": "duru-kulaklik-karsilastirici",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Netlify-ready headphone comparison site with shared JSON storage.",
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve .",
+    "lint": "node --check app.js && node --check netlify/functions/headphones.js"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^8.2.0"
+  }
+}
