@@ -8,12 +8,29 @@ const elements = {
   addForm: document.getElementById("add-form"),
   closeModal: document.getElementById("close-modal"),
   cancelAdd: document.getElementById("cancel-add"),
+  leftSlot: document.getElementById("left-slot"),
+  rightSlot: document.getElementById("right-slot"),
+  comparisonGrid: document.getElementById("comparison-grid"),
   modelSelect: document.getElementById("model-select"),
   priceInput: document.getElementById("price-input"),
   noteInput: document.getElementById("note-input"),
   addColorRow: document.getElementById("add-color-row"),
   colorRows: document.getElementById("color-rows"),
 };
+
+const compareLabels = [
+  ["driver", "Sürücü"],
+  ["connection", "Bağlantı"],
+  ["battery", "Pil"],
+  ["noiseCancelling", "Ses yalıtımı"],
+  ["microphone", "Mikrofon"],
+  ["latency", "Gecikme"],
+  ["weight", "Ağırlık"],
+  ["codec", "Codec"],
+  ["platform", "Platform"],
+  ["control", "Kontrol"],
+  ["rgb", "RGB"],
+];
 
 function escapeHtml(value) {
   return String(value)
@@ -34,6 +51,52 @@ function renderModelSelect() {
     .join("");
 
   elements.modelSelect.value = headphoneCatalog[0]?.id || "";
+}
+
+function renderCompareSelects() {
+  const options = headphoneCatalog
+    .map((item) => `<option value="${escapeHtml(item.id)}">${escapeHtml(item.name)} · ${escapeHtml(item.brand)}</option>`)
+    .join("");
+
+  elements.leftSlot.innerHTML = options;
+  elements.rightSlot.innerHTML = options;
+  elements.leftSlot.value = headphoneCatalog[0]?.id || "";
+  elements.rightSlot.value = headphoneCatalog[1]?.id || headphoneCatalog[0]?.id || "";
+}
+
+function renderComparisonCard(modelId, slotLabel) {
+  const model = getCatalogItem(modelId);
+  if (!model) {
+    return `
+      <article class="compare-card">
+        <p class="section-kicker">${slotLabel}</p>
+        <h3>Model seç</h3>
+      </article>
+    `;
+  }
+
+  return `
+    <article class="compare-card">
+      <p class="section-kicker">${slotLabel}</p>
+      <h3>${escapeHtml(model.name)}</h3>
+      <p class="muted">${escapeHtml(model.brand)}</p>
+      <div class="badges" style="margin-top:14px">
+        <span class="badge">${escapeHtml(model.colorHints?.join(" · ") || "Renk yok")}</span>
+        <span class="badge">${escapeHtml(model.priceHint ? formatPrice(model.priceHint) : "Fiyat yok")}</span>
+      </div>
+      <ul class="spec-list">
+        ${compareLabels
+          .map(([key, label]) => `<li><span>${escapeHtml(label)}</span><strong>${escapeHtml(model.specs?.[key] || "-")}</strong></li>`)
+          .join("")}
+      </ul>
+    </article>
+  `;
+}
+
+function renderComparison() {
+  elements.comparisonGrid.innerHTML = [elements.leftSlot.value || headphoneCatalog[0]?.id || "", elements.rightSlot.value || headphoneCatalog[1]?.id || headphoneCatalog[0]?.id || ""]
+    .map((modelId, index) => renderComparisonCard(modelId, index === 0 ? "Sol" : "Sağ"))
+    .join("");
 }
 
 function createColorRow(name = "", image = "") {
@@ -112,6 +175,8 @@ function wireEvents() {
   elements.openAddModal.addEventListener("click", openModal);
   elements.closeModal.addEventListener("click", closeModal);
   elements.cancelAdd.addEventListener("click", closeModal);
+  elements.leftSlot.addEventListener("change", renderComparison);
+  elements.rightSlot.addEventListener("change", renderComparison);
   elements.addColorRow.addEventListener("click", () => {
     elements.colorRows.append(createColorRow(""));
   });
@@ -209,8 +274,10 @@ async function submitForm(event) {
 
 function init() {
   renderModelSelect();
+  renderCompareSelects();
   seedColorRows();
   wireEvents();
+  renderComparison();
 }
 
 init();
