@@ -103,6 +103,7 @@ function createColorRow(name = "", image = "") {
   const row = document.createElement("div");
   row.className = "color-row";
   row.innerHTML = `
+    <div class="color-row-main">
     <label class="file-label">
       Renk adı
       <input type="text" class="color-name" maxlength="32" placeholder="Siyah" value="${escapeHtml(name)}" required />
@@ -111,8 +112,9 @@ function createColorRow(name = "", image = "") {
       Resim yükle
       <input type="file" class="color-file" accept="image/*" required />
     </label>
-    <img class="color-preview" alt="Renk önizleme" ${image ? `src="${image}"` : 'style="display:none"'} />
     <button class="remove-row" type="button" aria-label="Rengi kaldır">×</button>
+    </div>
+    <img class="color-preview" alt="Renk önizleme" ${image ? `src="${image}"` : 'style="display:none"'} />
   `;
 
   const preview = row.querySelector(".color-preview");

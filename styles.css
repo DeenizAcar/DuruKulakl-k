@@ -505,6 +505,10 @@ input:focus {
   align-items: center;
 }
 
+.color-row-main {
+  display: contents;
+}
+
 .color-row .file-label {
   display: grid;
   gap: 8px;
@@ -518,6 +522,11 @@ input:focus {
 
 .color-preview {
   display: block;
+  grid-column: 1 / -1;
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  justify-self: start;
 }
 
 .remove-row {
